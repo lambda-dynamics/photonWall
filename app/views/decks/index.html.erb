@@ -1,0 +1,27 @@
+<h1>Slide Decks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Associated Slides</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @decks.each do |deck| %>
+      <tr>
+        <td><%= deck.name %></td>
+        <td>(<%= deck.slides.count %>)</td>
+        <td><%= link_to 'Show', deck %></td>
+        <td><%= link_to 'Edit', edit_deck_path(deck) %></td>
+        <td><%= link_to 'Destroy', deck, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Slide Deck', new_deck_path, class: 'button is-dark is-large' %>

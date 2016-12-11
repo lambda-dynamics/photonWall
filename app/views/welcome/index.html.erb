@@ -1,0 +1,7 @@
+<div class="tile is-ancestor">
+<% @decks.each do |deck| %>
+  <div class="tile is-4 box">
+  <%= link_to deck.name, display_deck_path(deck), class: 'btn' %>
+  </div>
+<% end %>
+</div>

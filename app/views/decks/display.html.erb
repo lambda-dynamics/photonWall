@@ -1,0 +1,49 @@
+<div id="slider" style="position: absolute;">
+  <img id="i" />
+</div>
+
+<script type="text/javascript">
+
+var deck = null;
+
+$(function() {
+    $.getJSON('<%= deck_path(@deck, format: 'json') %>', function(data) {
+        deck = data;
+        $('#i').attr('src', deck.slide_urls[0]);
+    });
+});
+
+function getUpdate() {
+    $.getJSON('<%= deck_path(@deck, format: 'json') %>', function(data) {
+        deck = data;
+    });
+}
+
+function next() {
+    if(deck && deck.slide_urls.length > 1) {
+        console.log('Has more than 1 image');
+        pos = deck.slide_urls.indexOf($('#i').attr('src'));
+        if(pos < 0) {
+            pos = -1;
+        }
+        pos += 1;
+        if(pos == deck.slide_urls.length) {
+            console.log('Starting over at beginning');
+            pos = 0;
+        } else {
+            console.log('Going to ' + pos);
+        }
+        $('#slider').append('<img id="j" src="' + deck.slide_urls[pos] + '" />').animate({top: '-=720px'}, 0, function() {
+            $('#i').attr('src', deck.slide_urls[pos]);
+            $('#slider').animate({top: '+=720px'}, 1, function() {
+                $('#j').remove();
+            });
+        });
+    }
+}
+
+setInterval(next, 5000);
+setInterval(getUpdate, 26000);
+
+
+</script>

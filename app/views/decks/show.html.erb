@@ -1,0 +1,22 @@
+<h1><%= @deck.name %></h1>
+
+<h3>Slides</h3>
+
+<br>
+
+<%= render partial: 'slides/list', locals: {collection: @deck.slides} %>
+
+
+<%= link_to 'Edit', edit_deck_path(@deck) %> |
+<%= link_to 'Back', decks_path %>
+
+<% content_for :sidebar do %>
+<h4>Upload Images</h4>
+<%= form_for(Slide.new, html: { id: 'slide-drop', multipart: true, class: "dropzone"}) do |f|  %>
+<input type="hidden" name="slide[deck_ids][]" value="<%= @deck.id %>" />
+  <div class="fallback">
+    <%= f.file_field :attachment %><br>
+    <%= f.submit "Upload" %>
+  </div>
+<% end %>
+<% end %>

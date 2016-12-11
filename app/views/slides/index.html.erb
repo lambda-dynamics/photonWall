@@ -1,0 +1,15 @@
+<h1>Slides</h1>
+
+<%= render partial: 'list', locals: {collection: @slides} %>
+<br>
+
+<% content_for :sidebar do %>
+<h4>Upload Images</h4>
+<%= form_for(Slide.new, html: { id: 'slide-drop', multipart: true, class: "dropzone"}) do |f|  %>
+<%= collection_check_boxes :slide, :deck_ids, Deck.all, :id, :name %>
+  <div class="fallback">
+    <%= f.file_field :attachment %><br>
+    <%= f.submit "Upload" %>
+  </div>
+<% end %>
+<% end %>

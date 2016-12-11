@@ -1,0 +1,25 @@
+<div class="columns is-multiline">
+<% collection.each do |slide| %>
+ <div class="column">
+  <div class="card">
+    <div class="card-image">
+      <figure class="image">
+        <%= image_tag slide.attachment.url(:preview), class: 'preview' %>
+      </figure>
+    </div>
+    <div class="card-content">
+      <%= slide.name %>
+    </div>
+    <div class="card-footer">
+      <%= link_to 'Show', slide, class: 'button card-footer-item is-info' %>
+      <%= link_to 'Edit', edit_slide_path(slide), class: 'button card-footer-item is-warning' %>
+      <% if slide.decks.count > 0 %>
+        <%= link_to slide.decks.count, '#', class: 'button card-footer-item is-danger is-disabled' %>
+      <% else %>
+	<%= link_to 'Destroy', slide, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button card-footer-item is-danger' %>
+      <% end %>
+    </div>
+  </div>
+ </div>
+<% end %>
+</div>

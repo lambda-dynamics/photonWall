@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PhotonWall</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <section class="hero is-small is-dark is-bold">
+      <div class="hero-body">
+        <div class="container">
+	  <h1 class="title">PhotonWall</h1>
+	</div>
+      </div>
+    </section>
+    <br/>
+    <div class="container">
+      <div class="columns">
+        <div class="column is-2">
+	  <div class="box">
+  	    <aside class="menu">
+     	      <ul class="menu-item">
+                <li><%= link_to "#{icon('tv', class: 'fa-fw')} Start Shows".html_safe, root_path %></li>
+                <li><%= link_to "#{icon('list-alt', class: 'fa-fw')} Slide Decks".html_safe, decks_path %></li>
+                <li><%= link_to "#{icon('tablet', class: 'fa-fw')} Slides".html_safe, slides_path %></li>
+	      </ul>
+	    </aside>
+	  </div>
+	  <% if content_for?(:sidebar) %>
+	  <div class="box">
+	  <div class="content">
+	    <%= content_for :sidebar %>
+	    </div>
+	  </div>
+	  <% end %>
+	</div>
+	<div class="column">
+	  <div class="content">
+          <%= yield %>
+	  </div>
+	  </div>
+      </div>
+    </div>
+  </body>
+</html>
