@@ -30,6 +30,9 @@ class SlidesController < ApplicationController
     if !@slide.name || @slide.name.empty
       @slide.name = @slide.attachment_file_name
     end
+    if !@slide.duration
+      @slide.duration = 5
+    end
       if @slide.save
         format.html { redirect_to @slide, notice: 'Slide was successfully created.' }
         format.json { render :show, status: :created, location: @slide }

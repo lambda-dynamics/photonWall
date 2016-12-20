@@ -5,6 +5,6 @@ class Deck < ApplicationRecord
     has_and_belongs_to_many :slides
 
     def slide_urls
-        slides.order(:name).map{|s| s.attachment.url(:full)}
+        slides.order(:name).map{|s| {duration: s.duration, url: s.attachment.url(:full)}}
     end
 end

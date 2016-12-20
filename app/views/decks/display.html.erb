@@ -5,11 +5,14 @@
 <script type="text/javascript">
 
 var deck = null;
+var index = 0;
 
 $(function() {
     $.getJSON('<%= deck_path(@deck, format: 'json') %>', function(data) {
         deck = data;
-        $('#i').attr('src', deck.slide_urls[0]);
+	index = 0;
+        $('#i').attr('src', deck.slide_urls[index].url);
+	setTimeout(next, deck.slide_urls[index].duration* 1000);
     });
 });
 
@@ -22,7 +25,7 @@ function getUpdate() {
 function next() {
     if(deck && deck.slide_urls.length > 1) {
         console.log('Has more than 1 image');
-        pos = deck.slide_urls.indexOf($('#i').attr('src'));
+        pos = index;
         if(pos < 0) {
             pos = -1;
         }
@@ -33,16 +36,18 @@ function next() {
         } else {
             console.log('Going to ' + pos);
         }
-        $('#slider').append('<img id="j" src="' + deck.slide_urls[pos] + '" />').animate({top: '-=720px'}, 0, function() {
-            $('#i').attr('src', deck.slide_urls[pos]);
-            $('#slider').animate({top: '+=720px'}, 1, function() {
+        $('#slider').append('<img id="j" src="' + deck.slide_urls[pos].url + '" />').animate({top: '-=720px'}, 0, function() {
+            $('#i').attr('src', deck.slide_urls[pos].url);
+            $('#slider').animate({top: '+=720px'}, 0, function() {
                 $('#j').remove();
+		setTimeout(next, deck.slide_urls[pos].duration* 1000);
+		console.log('Next slide in ' + deck.slide_urls[pos].duration);
+		index = pos;
             });
         });
     }
 }
 
-setInterval(next, 5000);
 setInterval(getUpdate, 26000);
 
 
