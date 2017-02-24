@@ -1,0 +1,25 @@
+<div class="columns is-multiline">
+<% deck.decks_slides.order(:order).each do |ds| %>
+ <div class="column">
+  <div class="card">
+    <div class="card-image">
+      <figure class="image">
+        <%= image_tag ds.slide.attachment.url(:preview), class: 'preview' %>
+      </figure>
+    </div>
+    <div class="card-content">
+      [<%= ds.order %>] <%= ds.slide.name %>
+    </div>
+    <div class="card-footer">
+      <%= link_to 'Show', ds.slide, class: 'button card-footer-item is-info' %>
+      <%= link_to 'Edit', edit_slide_path(ds.slide), class: 'button card-footer-item is-warning' %>
+      <% if ds.slide.decks.count > 0 %>
+        <%= link_to ds.slide.decks.count, '#', class: 'button card-footer-item is-danger is-disabled' %>
+      <% else %>
+	<%= link_to 'Destroy', ds.slide, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button card-footer-item is-danger' %>
+      <% end %>
+    </div>
+  </div>
+ </div>
+<% end %>
+</div>

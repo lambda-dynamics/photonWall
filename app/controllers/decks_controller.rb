@@ -1,5 +1,5 @@
 class DecksController < ApplicationController
-  before_action :set_deck, only: [:show, :display, :edit, :update, :destroy]
+  before_action :set_deck, only: [:show, :display, :edit, :update, :destroy, :reorder]
 
   # GET /decks
   # GET /decks.json
@@ -13,7 +13,7 @@ class DecksController < ApplicationController
   end
 
   def display
-      render layout: 'display'
+    render layout: 'display'
   end
 
   # GET /decks/new
@@ -65,14 +65,26 @@ class DecksController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_deck
-      @deck = Deck.friendly.find(params[:id])
+  def reorder
+    i = 0
+    q = ''
+    @deck.decks_slides.to_a.shuffle.each do |ds|
+      ds.order = i
+      q += ds.inspect + "\n"
+      ds.save
+      i += 1
     end
+    redirect_to @deck, notice: "Reordered slides"
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def deck_params
-      params.require(:deck).permit(:name, slide_id: [])
-    end
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_deck
+    @deck = Deck.friendly.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def deck_params
+    params.require(:deck).permit(:name, slide_id: [])
+  end
 end
