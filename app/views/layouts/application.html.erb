@@ -40,6 +40,9 @@
 	<div class="column">
 	  <div class="content">
           <%= yield %>
+          <% flash.each do |typ, msg| %>
+            <div class="alert"><%= msg %></div>
+          <% end %>
 	  </div>
 	  </div>
       </div>

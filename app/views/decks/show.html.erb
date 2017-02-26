@@ -4,9 +4,10 @@
 
 <br>
 
-<%= render partial: 'slides/list', locals: {collection: @deck.slides} %>
+<%= render partial: 'slides', locals: {deck: @deck} %>
 
 
+<%= link_to 'Reorder Slides', reorder_deck_path(@deck) %> |
 <%= link_to 'Edit', edit_deck_path(@deck) %> |
 <%= link_to 'Back', decks_path %>
 

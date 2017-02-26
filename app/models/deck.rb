@@ -2,9 +2,10 @@ class Deck < ApplicationRecord
     extend FriendlyId
     friendly_id :name, use: :slugged
 
-    has_and_belongs_to_many :slides
+    has_many :decks_slides
+    has_many :slides, through: :decks_slides
 
     def slide_urls
-        slides.order(:name).map{|s| {duration: s.duration, url: s.attachment.url(:full)}}
+      decks_slides.order(:order).map{|ds| {duration: ds.slide.duration, url: ds.slide.attachment.url(:full)}}
     end
 end

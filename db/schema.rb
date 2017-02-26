@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161220214046) do
+ActiveRecord::Schema.define(version: 20170224215326) do
 
   create_table "decks", force: :cascade do |t|
     t.string   "name"
@@ -20,9 +20,10 @@ ActiveRecord::Schema.define(version: 20161220214046) do
     t.index ["slug"], name: "index_decks_on_slug", unique: true
   end
 
-  create_table "decks_slides", id: false, force: :cascade do |t|
+  create_table "decks_slides", force: :cascade do |t|
     t.integer "deck_id"
     t.integer "slide_id"
+    t.integer "order"
     t.index ["deck_id"], name: "index_decks_slides_on_deck_id"
     t.index ["slide_id"], name: "index_decks_slides_on_slide_id"
   end

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :decks do
       member do
           get 'display'
+          get 'reorder'
       end
   end
 
