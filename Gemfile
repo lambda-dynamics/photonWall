@@ -30,6 +30,7 @@ gem 'friendly_id'
 gem 'simple_form'
 gem 'font-awesome-sass'
 gem 'bulma-rails'
+gem 'exifr'
 #gem 'pg'
 
 # Use Capistrano for deployment
