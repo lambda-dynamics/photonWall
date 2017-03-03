@@ -13,7 +13,7 @@
 
 <% content_for :sidebar do %>
 <h4>Upload Images</h4>
-<%= form_for(Slide.new, html: { id: 'slide-drop', multipart: true, class: "dropzone"}) do |f|  %>
+<%= form_for(Slide.new, html: { id: 'slide-drop', multipart: true, class: 'dropzone'}) do |f|  %>
 <input type="hidden" name="slide[deck_ids][]" value="<%= @deck.id %>" />
   <div class="fallback">
     <%= f.file_field :attachment %><br>
