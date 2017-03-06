@@ -21,6 +21,7 @@ module Paperclip
 
         data = EXIFR::JPEG.new(@file.path)
         name = data.artist
+	if name && name.match(/\w+/)
         puts "Annotating #{name}"
 
         command = "convert"
@@ -30,6 +31,7 @@ module Paperclip
         rescue PaperclipCommandLineError
           raise PaperclipError, "There was an error processing the watermark for #{@basename}" if @whiny
         end
+	end
 
         dst
     end
