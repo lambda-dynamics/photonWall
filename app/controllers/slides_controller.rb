@@ -67,6 +67,13 @@ class SlidesController < ApplicationController
     end
   end
 
+  def cleanup
+    Slide.where("created_at < ?", params[:limit]).each do |s|
+      s.decks.clear
+      s.delete
+    end
+    redirect_to root_url
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_slide

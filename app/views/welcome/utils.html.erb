@@ -1,0 +1,9 @@
+<div class="tile">
+  <div class="tile is-4 box">
+    <h3>Delete Images Before Date</h3>
+    <%= form_tag cleanup_slides_url do %>
+      <%= text_field_tag :limit, nil, placeholder: 'YYYY-MM-DD HH:MM' %>
+      <%= submit_tag 'Remove Images' %>
+    <% end %>
+  </div>
+</div>
